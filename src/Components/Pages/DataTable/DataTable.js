@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Table } from "react-bootstrap";
+import './DataTable.css';
 
 const DataTable = () => {
     return (
@@ -7,22 +8,22 @@ const DataTable = () => {
             <Table striped bordered hover bg="secondary" className="border border-1 rounded">
                 <thead>
                     <tr>
-                        <th style={{width:'16%'}}>Billing Id</th>
-                        <th style={{width:'16%'}}>Full Name</th>
-                        <th style={{width:'16%'}}>Email</th>
-                        <th style={{width:'16%'}}>Phone</th>
-                        <th style={{width:'16%'}}>Paid Ammount</th>
-                        <th style={{width:'16%'}}>Action</th>
+                        <th>Billing Id</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Paid Ammount</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody style={{width:'100%'}}>
                     <tr style={{width:'100%'}}>
-                        <td className="text-wrap" style={{width:'100px'}} >1156489641351684651654</td>
-                        <td style={{width:'16%'}}>Mark</td>
-                        <td style={{width:'16%'}}>Otto@gmail.com</td>
-                        <td style={{width:'16%'}}>123456</td>
-                        <td style={{width:'16%'}}>50000</td>
-                        <td style={{width:'16%'}}>
+                        <td className="billing-desk">1156489641351684651651</td>
+                        <td>Mark</td>
+                        <td>Otto@gmail.com</td>
+                        <td>123456</td>
+                        <td>50000</td>
+                        <td>
                             <Button variant="info">Edit</Button>{" "}
                             <Button variant="danger">Delete</Button>{" "}
                         </td>
