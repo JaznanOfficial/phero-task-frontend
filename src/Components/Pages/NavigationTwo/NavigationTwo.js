@@ -37,7 +37,15 @@ const NavigationTwo = () => {
                     setShow(false);
                     e.target.reset();
                 }
+                else {
+                    setShow(false);
+                    toast.error("Oops! Something went wrong. Please try again");
+                }
             })
+            .catch((err) => { 
+                setShow(false);
+                toast.error("Oops! Something went wrong. Please try again");
+            });
 
     };
 
