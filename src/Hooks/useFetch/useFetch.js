@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 const useFetch = () => {
     const [data, setData] = useState([]);
 
+
     const postMethod = (url, setShow, bills, e) => {
         fetch(url, {
             method: "POST",
@@ -74,6 +75,8 @@ const useFetch = () => {
         deleteMethod,
         getMethod,
         postMethod,
+
+
     };
 };
 

@@ -6,16 +6,17 @@ import "./DataTable.css";
 const DataTable = () => {
     // const [bills, setBills] = useState([]);
 
-    // const { data } = useFetch("http://localhost:5000/api/allBills");
+    // const { data } = useFetch("https://phero-task-server.herokuapp.com/api/allBills");
     // console.log(data);
-    const { deleteMethod,data, getMethod } = useFetch();
-    
+    const { deleteMethod, data, getMethod } = useFetch();
+
     const deleteHandler = (id) => {
         console.log(id);
-        deleteMethod(`http://localhost:5000/api/deleteBill/${id}`, id, data);
-    }
+        window.confirm("Are you sure you want to delete this bill?");
+        deleteMethod(`https://phero-task-server.herokuapp.com/api/deleteBill/${id}`, id, data);
+    };
 
-    getMethod("http://localhost:5000/api/allBills");
+    getMethod("https://phero-task-server.herokuapp.com/api/allBills");
 
     return (
         <div>
@@ -30,7 +31,7 @@ const DataTable = () => {
                         <th>Action</th>
                     </tr>
                 </thead>
-                    <tbody style={{ width: "100%" }}>
+                <tbody style={{ width: "100%" }}>
                     {data.map((bill) => {
                         const { _id, name, email, phone, ammount } = bill;
                         return (
@@ -42,12 +43,14 @@ const DataTable = () => {
                                 <td>{ammount}</td>
                                 <td>
                                     <Button variant="info">Edit</Button>{" "}
-                                    <Button variant="danger" onClick={()=> deleteHandler(_id)} >Delete</Button>{" "}
+                                    <Button variant="danger" onClick={() => deleteHandler(_id)}>
+                                        Delete
+                                    </Button>{" "}
                                 </td>
                             </tr>
                         );
                     })}
-                </tbody> 
+                </tbody>
             </Table>
         </div>
     );
