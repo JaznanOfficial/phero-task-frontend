@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Table } from "react-bootstrap";
 import './DataTable.css';
 
 const DataTable = () => {
+
+    const [bills, setBills] = React.useState([]);
+
+    useEffect(() => { 
+        fetch("http://localhost:5000/api/allBiills")
+            .then((res) => res.json())
+            .then((data) => {
+                setBills(data);
+            }).catch((err) => {
+                console.log(err);
+            }
+            );
+    }, []);
+
     return (
         <div>
             <Table striped bordered hover bg="secondary" className="border border-1 rounded">

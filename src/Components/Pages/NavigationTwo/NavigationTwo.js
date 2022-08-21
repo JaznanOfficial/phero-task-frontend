@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Button, Container, Form, Modal, Nav, Navbar } from "react-bootstrap";
+import { toast } from 'react-toastify';
+
 
 const NavigationTwo = () => {
     const [show, setShow] = useState(false);
@@ -19,6 +21,24 @@ const NavigationTwo = () => {
         const phone = phoneRef.current.value;
         const ammount = ammountRef.current.value;
         console.log({ name, email, phone, ammount });
+        const data = { name, email, phone, ammount };
+
+        fetch("http://localhost:5000/api/allBiills", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.acknowledged) {
+                    toast.success("Successfully added bill");
+                    setShow(false);
+                    e.target.reset();
+                }
+            })
+
     };
 
     return (
@@ -64,6 +84,7 @@ const NavigationTwo = () => {
                                                     type="text"
                                                     placeholder="Enter Full Name"
                                                     ref={nameRef}
+                                                    required
                                                 />
                                             </Form.Group>
                                             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -72,14 +93,18 @@ const NavigationTwo = () => {
                                                     type="email"
                                                     placeholder="Enter email"
                                                     ref={emailRef}
+                                                    required
                                                 />
                                             </Form.Group>
                                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                                 <Form.Label>Phone Number</Form.Label>
                                                 <Form.Control
-                                                    type="number"
+                                                    type="tel"
                                                     placeholder="Enter valid phone number"
                                                     ref={phoneRef}
+                                                    maxLength="11"
+                                                    pattern="[0-9]{11}"
+                                                    required
                                                 />
                                             </Form.Group>
                                             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -88,6 +113,7 @@ const NavigationTwo = () => {
                                                     type="number"
                                                     placeholder="paid ammount"
                                                     ref={ammountRef}
+                                                    required
                                                 />
                                             </Form.Group>
 
@@ -106,6 +132,7 @@ const NavigationTwo = () => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
+            
         </div>
     );
 };
