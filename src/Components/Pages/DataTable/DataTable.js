@@ -6,14 +6,16 @@ import "./DataTable.css";
 const DataTable = () => {
     // const [bills, setBills] = useState([]);
 
-    const { data } = useFetch("http://localhost:5000/api/allBills");
-    console.log(data);
-    const { deleteMethod } = useFetch();
+    // const { data } = useFetch("http://localhost:5000/api/allBills");
+    // console.log(data);
+    const { deleteMethod,data, getMethod } = useFetch();
     
     const deleteHandler = (id) => {
         console.log(id);
-        deleteMethod(`http://localhost:5000/api/deleteBill/${id}`, id);
+        deleteMethod(`http://localhost:5000/api/deleteBill/${id}`, id, data);
     }
+
+    getMethod("http://localhost:5000/api/allBills");
 
     return (
         <div>

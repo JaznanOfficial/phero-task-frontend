@@ -4,6 +4,9 @@ import { toast } from 'react-toastify';
 
 
 const NavigationTwo = () => {
+
+    const { data } = useFetch();
+
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -23,29 +26,7 @@ const NavigationTwo = () => {
         console.log({ name, email, phone, ammount });
         const data = { name, email, phone, ammount };
 
-        fetch("http://localhost:5000/api/allBiills", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.acknowledged) {
-                    toast.success("Successfully added bill");
-                    setShow(false);
-                    e.target.reset();
-                }
-                else {
-                    setShow(false);
-                    toast.error("Oops! Something went wrong. Please try again");
-                }
-            })
-            .catch((err) => { 
-                setShow(false);
-                toast.error("Oops! Something went wrong. Please try again");
-            });
+        
 
     };
 
