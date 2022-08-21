@@ -1,21 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
-import './DataTable.css';
+import useFetch from "../../../Hooks/useFetch/useFetch";
+import "./DataTable.css";
 
 const DataTable = () => {
+    // const [bills, setBills] = useState([]);
 
-    const [bills, setBills] = React.useState([]);
-
-    useEffect(() => { 
-        fetch("http://localhost:5000/api/allBiills")
-            .then((res) => res.json())
-            .then((data) => {
-                setBills(data);
-            }).catch((err) => {
-                console.log(err);
-            }
-            );
-    }, []);
+    const { data } = useFetch("http://localhost:5000/api/allBills");
+    console.log(data);
+    const { deleteMethod } = useFetch();
+    
+    const deleteHandler = (id) => {
+        console.log(id);
+        deleteMethod(`http://localhost:5000/api/deleteBill/${id}`, id);
+    }
 
     return (
         <div>
@@ -30,19 +28,24 @@ const DataTable = () => {
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody style={{width:'100%'}}>
-                    <tr style={{width:'100%'}}>
-                        <td className="billing-desk">1156489641351684651651</td>
-                        <td>Mark</td>
-                        <td>Otto@gmail.com</td>
-                        <td>123456</td>
-                        <td>50000</td>
-                        <td>
-                            <Button variant="info">Edit</Button>{" "}
-                            <Button variant="danger">Delete</Button>{" "}
-                        </td>
-                    </tr>
-                </tbody>
+                    <tbody style={{ width: "100%" }}>
+                    {data.map((bill) => {
+                        const { _id, name, email, phone, ammount } = bill;
+                        return (
+                            <tr style={{ width: "100%" }} key={_id}>
+                                <td className="billing-desk">{_id}</td>
+                                <td>{name}</td>
+                                <td>{email}</td>
+                                <td>{phone}</td>
+                                <td>{ammount}</td>
+                                <td>
+                                    <Button variant="info">Edit</Button>{" "}
+                                    <Button variant="danger" onClick={()=> deleteHandler(_id)} >Delete</Button>{" "}
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </tbody> 
             </Table>
         </div>
     );
