@@ -5,20 +5,20 @@ import { toast } from "react-toastify";
 const useFetch = () => {
     const [data, setData] = useState([]);
 
-    const postMethod = (url, setShow) => {
+    const postMethod = (url, setShow, bills, e) => {
         fetch(url, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify(bills),
         })
             .then((res) => res.json())
             .then((data) => {
                 if (data.acknowledged) {
                     toast.success("Successfully added bill");
                     setShow(false);
-                    e.target.reset();
+                    e.target.reset()
                 } else {
                     setShow(false);
                     toast.error("Oops! Something went wrong. Please try again");

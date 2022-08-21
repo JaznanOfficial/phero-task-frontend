@@ -1,11 +1,12 @@
 import React, { useRef, useState } from "react";
 import { Button, Container, Form, Modal, Nav, Navbar } from "react-bootstrap";
 import { toast } from 'react-toastify';
+import useFetch from "../../../Hooks/useFetch/useFetch";
 
 
 const NavigationTwo = () => {
 
-    const { data } = useFetch();
+    const { postMethod } = useFetch();
 
     const [show, setShow] = useState(false);
 
@@ -26,6 +27,7 @@ const NavigationTwo = () => {
         console.log({ name, email, phone, ammount });
         const data = { name, email, phone, ammount };
 
+        postMethod("http://localhost:5000/api/allBiills", setShow, data, e);
         
 
     };
