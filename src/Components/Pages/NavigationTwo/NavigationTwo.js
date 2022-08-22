@@ -14,16 +14,16 @@ const NavigationTwo = () => {
     const nameRef = useRef();
     const emailRef = useRef();
     const phoneRef = useRef();
-    const ammountRef = useRef();
+    const amountRef = useRef();
 
     const handFormSubmit = (e) => {
         e.preventDefault();
         const name = nameRef.current.value;
         const email = emailRef.current.value;
         const phone = phoneRef.current.value;
-        const ammount = ammountRef.current.value;
-        console.log({ name, email, phone, ammount });
-        const data = { name, email, phone, ammount };
+        const amount = amountRef.current.value;
+        console.log({ name, email, phone, amount });
+        const data = { name, email, phone, amount };
 
         postMethod("https://phero-task-server.herokuapp.com/api/allBiills", setShow, data, e);
     };
@@ -99,7 +99,7 @@ const NavigationTwo = () => {
                                                 <Form.Control
                                                     type="number"
                                                     placeholder="paid ammount"
-                                                    ref={ammountRef}
+                                                    ref={amountRef}
                                                     required
                                                 />
                                             </Form.Group>

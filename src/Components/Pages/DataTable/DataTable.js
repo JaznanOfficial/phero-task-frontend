@@ -33,14 +33,14 @@ const DataTable = () => {
                 </thead>
                 <tbody style={{ width: "100%" }}>
                     {data.map((bill) => {
-                        const { _id, name, email, phone, ammount } = bill;
+                        const { _id, name, email, phone, amount } = bill;
                         return (
                             <tr style={{ width: "100%" }} key={_id}>
                                 <td className="billing-desk">{_id}</td>
                                 <td>{name}</td>
                                 <td>{email}</td>
                                 <td>{phone}</td>
-                                <td>{ammount}</td>
+                                <td>{amount}</td>
                                 <td>
                                     <Button variant="info">Edit</Button>{" "}
                                     <Button variant="danger" onClick={() => deleteHandler(_id)}>
