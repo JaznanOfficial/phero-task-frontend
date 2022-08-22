@@ -6,24 +6,39 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import useFetch from "../../Hooks/useFetch/useFetch";
 
 const Navigation = () => {
-    // const {data, getMethod } = useFetch();
+    const { data, getMethod } = useFetch();
     const [total, setTotal] = useState(0);
+
+    useEffect(() => {
+        getMethod("https://phero-task-server.herokuapp.com/api/allBills");
+        console.log(data);
+
+        let totalAmount = 0;
+        data.forEach((bill) => {
+            // console.log(bill.amount);
+            const totalNumber = (totalAmount += parseInt(bill.amount));
+            console.log(totalNumber);
+            setTotal(totalNumber);
+        });
+    }, [getMethod, data]);
+
+    // const [total, setTotal] = useState(0);
     // const [bills, setBills] = useState([]);
     // const totalAmount = [];
 
-    useEffect(() => {
-        fetch("https://phero-task-server.herokuapp.com/api/allBills")
-            .then((res) => res.json())
-            .then((data) => {
-                let totalAmount = 0;
-                data.forEach((bill) => {
-                    // console.log(bill.amount);
-                    const totalNumber = (totalAmount += parseInt(bill.amount));
-                    setTotal(totalNumber);
-                    console.log(total);
-                });
-            });
-    }, [total]);
+    // useEffect(() => {
+    //     fetch("https://phero-task-server.herokuapp.com/api/allBills")
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //             let totalAmount = 0;
+    //             data.forEach((bill) => {
+    //                 // console.log(bill.amount);
+    //                 const totalNumber = (totalAmount += parseInt(bill.amount));
+    //                 setTotal(totalNumber);
+    //                 console.log(total);
+    //             });
+    //         });
+    // }, [total]);
 
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
