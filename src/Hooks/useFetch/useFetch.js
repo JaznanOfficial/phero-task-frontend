@@ -45,6 +45,24 @@ const useFetch = () => {
     };
     // get method------------------------------>
 
+
+    const putMethod = (url,data,setShow,e) => {
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(),
+        })
+
+
+    }
+
+
+
+
+    // put method------------------------------>
+
     const deleteMethod = (url, id, bills) => {
         console.log(bills);
         fetch(url, {
@@ -75,6 +93,7 @@ const useFetch = () => {
         deleteMethod,
         getMethod,
         postMethod,
+        putMethod,
 
 
     };

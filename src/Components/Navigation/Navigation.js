@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import useFetch from "../../Hooks/useFetch/useFetch";
 
 const Navigation = () => {
@@ -15,7 +14,6 @@ const Navigation = () => {
 
         let totalAmount = 0;
         data.forEach((bill) => {
-            // console.log(bill.amount);
             const totalNumber = (totalAmount += parseInt(bill.amount));
             console.log(totalNumber);
             setTotal(totalNumber);
