@@ -10,12 +10,12 @@ const Navigation = () => {
 
     useEffect(() => {
         getMethod("https://phero-task-server.herokuapp.com/api/allBills");
-        console.log(data);
+        // console.log(data);
 
         let totalAmount = 0;
         data.forEach((bill) => {
             const totalNumber = (totalAmount += parseInt(bill.amount));
-            console.log(totalNumber);
+            // console.log(totalNumber);
             setTotal(totalNumber);
         });
     }, [getMethod, data]);

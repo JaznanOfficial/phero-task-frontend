@@ -9,6 +9,7 @@ const DataTable = () => {
     // const { data } = useFetch("https://phero-task-server.herokuapp.com/api/allBills");
     // console.log(data);
     const { deleteMethod, data, getMethod, putMethod } = useFetch();
+    const [modalData, setModalData] = useState();
 
     const deleteHandler = (id) => {
         console.log(id);
@@ -17,15 +18,19 @@ const DataTable = () => {
     };
 
     // delete method--------------------------->
-    useEffect(() => {
-        getMethod("https://phero-task-server.herokuapp.com/api/allBills");
-    },[])
+    // useEffect(() => {
+    getMethod("https://phero-task-server.herokuapp.com/api/allBills");
+    // },[])
 
     // get method------------------------------->
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = (bill) => {
+        setShow(true);
+        setModalData(bill);
+        console.log(modalData);
+    };
     const nameRef = useRef();
     const emailRef = useRef();
     const phoneRef = useRef();
@@ -39,17 +44,14 @@ const DataTable = () => {
         const email = emailRef.current.value;
         const phone = phoneRef.current.value;
         const amount = amountRef.current.value;
-        const id = idRef.current.value;
+        const _id = idRef.current.value;
 
-        console.log({ name, email, phone, amount, id });
+        // console.log({ name, email, phone, amount, _id });
         const data = { name, email, phone, amount };
         console.log(data);
-        // putMethod(`/api/update/${id}`,)
+        putMethod(`http://localhost:5000/api/updateBills/${_id}`,data,setShow,e)
     };
 
-    // const putHandler = (id) => {
-    // console.log(id);
-    // };
 
     // put mehtod--------------------------->
 
@@ -77,7 +79,7 @@ const DataTable = () => {
                                 <td>{phone}</td>
                                 <td>{amount}</td>
                                 <td>
-                                    <Button variant="info" onClick={handleShow}>
+                                    <Button variant="info" onClick={() => handleShow(bill)}>
                                         Edit
                                     </Button>{" "}
                                     <Modal
@@ -100,7 +102,7 @@ const DataTable = () => {
                                                         <Form.Control
                                                             type="text"
                                                             ref={idRef}
-                                                            value={_id}
+                                                            value={modalData?._id}
                                                             disabled
                                                         />
                                                     </Form.Group>
@@ -113,7 +115,7 @@ const DataTable = () => {
                                                             type="text"
                                                             placeholder="Enter Full Name"
                                                             ref={nameRef}
-                                                            defaultValue={name}
+                                                            defaultValue={modalData?.name}
                                                             required
                                                         />
                                                     </Form.Group>
@@ -127,7 +129,7 @@ const DataTable = () => {
                                                             placeholder="Enter email"
                                                             ref={emailRef}
                                                             required
-                                                            defaultValue={email}
+                                                            defaultValue={modalData?.email}
                                                         />
                                                     </Form.Group>
                                                     <Form.Group
@@ -141,7 +143,7 @@ const DataTable = () => {
                                                             ref={phoneRef}
                                                             maxLength="11"
                                                             pattern="[0-9]{11}"
-                                                            defaultValue={phone}
+                                                            defaultValue={modalData?.phone}
                                                             required
                                                         />
                                                     </Form.Group>
@@ -155,7 +157,7 @@ const DataTable = () => {
                                                             placeholder="paid ammount"
                                                             ref={amountRef}
                                                             required
-                                                            defaultValue={amount}
+                                                            defaultValue={modalData?.amount}
                                                         />
                                                     </Form.Group>
 

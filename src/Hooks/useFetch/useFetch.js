@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 const useFetch = () => {
     const [data, setData] = useState([]);
 
-
     const postMethod = (url, setShow, bills, e) => {
         fetch(url, {
             method: "POST",
@@ -19,7 +18,7 @@ const useFetch = () => {
                 if (data.acknowledged) {
                     toast.success("Successfully added bill");
                     setShow(false);
-                    e.target.reset()
+                    e.target.reset();
                 } else {
                     setShow(false);
                     toast.error("Oops! Something went wrong. Please try again");
@@ -45,21 +44,30 @@ const useFetch = () => {
     };
     // get method------------------------------>
 
-
-    const putMethod = (url,data,setShow,e) => {
+    const putMethod = (url, data, setShow, e) => {
         fetch(url, {
-            method: "POST",
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(),
+            body: JSON.stringify(data),
         })
-
-
-    }
-
-
-
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.acknowledged) {
+                    toast.success("Successfully added bill");
+                    setShow(false);
+                    e.target.reset();
+                } else {
+                    setShow(true);
+                    toast.error("Oops! Something went wrong. Please try again");
+                }
+            })
+            .catch((err) => {
+                setShow(true);
+                toast.error("Oops! Something went wrong. Please try again");
+            });
+    };
 
     // put method------------------------------>
 
@@ -94,8 +102,6 @@ const useFetch = () => {
         getMethod,
         postMethod,
         putMethod,
-
-
     };
 };
 
