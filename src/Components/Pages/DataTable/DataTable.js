@@ -49,7 +49,7 @@ const DataTable = () => {
         // console.log({ name, email, phone, amount, _id });
         const data = { name, email, phone, amount };
         console.log(data);
-        putMethod(`http://localhost:5000/api/updateBills/${_id}`,data,setShow,e)
+        putMethod(`https://phero-task-server.herokuapp.com/api/updateBills/${_id}`,data,setShow,e)
     };
 
 
